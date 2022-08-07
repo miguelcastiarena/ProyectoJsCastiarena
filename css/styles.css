@@ -1,0 +1,15 @@
+body {
+    background-color: bisque;
+    font-family: sans-serif;
+}
+
+main {
+    font-family: sans-serif;
+    background-color: yellowgreen;
+    padding: 2%;
+}
+
+header {
+    background-color: rgb(47, 82, 171);
+    padding: 2%;
+}
