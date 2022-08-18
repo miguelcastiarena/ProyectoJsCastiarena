@@ -13,3 +13,9 @@ header {
     background-color: rgb(47, 82, 171);
     padding: 2%;
 }
+
+nav {
+    display:flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}

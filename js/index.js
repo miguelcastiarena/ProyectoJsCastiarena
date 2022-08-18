@@ -3,6 +3,8 @@ let marca
 let bicicletas
 let esqui
 const IVA = 1.21
+const carrito = []
+let productoAComprar;
 
 class Producto {
     constructor(nombre, id, precio, stock, nuevo, seccion) {
@@ -49,50 +51,32 @@ const prod18 = new Producto("Inflador Olmo", 0022, 2167, 8, true, bicicletas)
 
 
 
-//Prompt de inicio y para ingresar nombre de usuario
+//Ingresar nombre de usuario
 
-let nombreUsuario;
+let nombreUsuario = document.getElementById("nombreIngresado")
+const boton = document.getElementById("botonUsuario")
+boton.addEventListener("click", ingresarUsuario)
 
-function nombreDeUsuario() {
+function ingresarUsuario() {
     alert("Bienvenido a La Bolsa del Deporte Tienda Online");
     let nombre = prompt("Ingrese su nombre:")
     while (nombre === "" || nombre === null) {
         nombre = prompt("Ingrese su nombre:")
     }
-    nombreUsuario = nombre
+    nombreUsuario.innerText = nombre
 }
 
 
-// Elegir Seccion de productos
 
-function seccionDeProductos() {
-    let seccion;
-do {
-    seccion = prompt("Que sección desea ver? (Ingrese un número) \n1)Escalada/Montaña \n2)Esqui \n3)Bicicletas" )
-} while ( seccion != 1 && seccion != 2 && seccion != 3);
+let agregarACarrito = function (prod) {
+    alert(`Se agregó ${prod.nombre} al carrito`)
+    carrito.push(prod)
+}
 
-switch (seccion) {
-    case "1" : 
-        console.log(nombreUsuario + " ha ingresado a la sección Escalada/Montaña" )
-        seccionEscalada()
-        break
-    case "2" :
-        console.log(nombreUsuario + " ha ingresado a la sección Esqui")
-        seccionEsqui()
-        break
-    case "3" :
-        console.log(nombreUsuario + " ha ingresado a la sección Bicicletas" )
-        seccionBicicletas()
-        break
-}
-}
 
 //SECCIONES
 
-
 //Seccion Escalada
-
-let productoAComprar;
 
 
 function seccionEscalada () {
@@ -121,6 +105,7 @@ switch (productoEscalada) {
         productoAComprar = prod6
         break
 }
+agregarACarrito(productoAComprar)
 
 }
 
@@ -152,6 +137,7 @@ switch (productoEsqui) {
         productoAComprar = prod12
         break
 }
+agregarACarrito(productoAComprar)
 
 }
 
@@ -182,40 +168,43 @@ switch (productoBicicletas) {
     case "6" :
         productoAComprar = prod18
         break
+        
 }
+agregarACarrito(productoAComprar)
 
 }
 
-const carrito = []
-let agregarACarrito = function (prod) {
-    console.log(`Se agregó ${prod.nombre} al carrito`)
-    carrito.push(prod)
-}
+
 
 //Inicio de las funciones
 
-//debugger
-nombreDeUsuario()
-seccionDeProductos();
-agregarACarrito(productoAComprar)
+let botonSeccionEscalada = document.getElementById("botonEscalada")
+botonSeccionEscalada.addEventListener("click", seccionEscalada)
 
-while (confirm("Desea agregar mas articulos al carrito?") === true) {
-    seccionDeProductos()
-    agregarACarrito(productoAComprar)
-}
+let botonSeccionEsqui = document.getElementById("botonEsqui")
+botonSeccionEsqui.addEventListener("click", seccionEsqui)
+
+let botonSeccionBici = document.getElementById("botonBici")
+botonSeccionBici.addEventListener("click", seccionBicicletas)
 
 //Lista de productos en carrito con map()
 
 const productosCarrito = carrito.map((el) => el.nombre)
 const sumaPrecios = carrito.map((el) => el.precio)
 
-alert("Productos en carrito: \n \n" + productosCarrito.join("\n"))
+const listaCarrito = document.getElementById("prodCarrito")
+listaCarrito.innerText = productosCarrito.join(", ")
+
 
 //Precio total por la compra con reduce()
 
 const precioTotal = sumaPrecios.reduce((acumulador, elemento) => acumulador + elemento, 0)
 
-alert("El precioo total es: $" + precioTotal)
+//alert("El precioo total es: $" + precioTotal)
+
+const listaPrecioCarrito = document.getElementById("precioCarrito")
+listaPrecioCarrito.innerText = precioTotal
+
 
 
 
