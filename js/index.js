@@ -71,6 +71,7 @@ function ingresarUsuario() {
 let agregarACarrito = function (prod) {
     alert(`Se agregó ${prod.nombre} al carrito`)
     carrito.push(prod)
+    actualizarProductos()
 }
 
 
@@ -187,6 +188,10 @@ botonSeccionEsqui.addEventListener("click", seccionEsqui)
 let botonSeccionBici = document.getElementById("botonBici")
 botonSeccionBici.addEventListener("click", seccionBicicletas)
 
+
+function actualizarProductos() {
+    
+
 //Lista de productos en carrito con map()
 
 const productosCarrito = carrito.map((el) => el.nombre)
@@ -204,7 +209,7 @@ const precioTotal = sumaPrecios.reduce((acumulador, elemento) => acumulador + el
 
 const listaPrecioCarrito = document.getElementById("precioCarrito")
 listaPrecioCarrito.innerText = precioTotal
-
+}
 
 
 
