@@ -6,6 +6,7 @@ const IVA = 1.21
 const carrito = []
 let productoAComprar;
 
+
 class Producto {
     constructor(nombre, id, precio, stock, nuevo, seccion) {
         this.nombre = nombre.toUpperCase();
@@ -14,7 +15,6 @@ class Producto {
         this.stock = stock;
         this.nuevo = nuevo;
         this.seccion = seccion
-       
     }
     precioConIVA() {
             let precioFinal = this.precio * IVA
@@ -23,7 +23,9 @@ class Producto {
     actulizarStock(unidades){
             this.stock = this.stock - unidades
         }
+
 }
+
 
 //Productos Escalada
 const prod1 = new Producto("Casco Edelrid Zodiac", 0001, 18861, 10, true, "escalada")
@@ -42,12 +44,24 @@ const prod11 = new Producto("Esquies Rossignol Soul", 0013, 123768, 5, true, "es
 const prod12 = new Producto("Esquies Fisher Ranger", 0014, 120543, 3, true, "esqui")
 
 //Productos Bicicletas
-const prod13 = new Producto("Casco Bicicleta Shimano", 0015, 13789, 15, true, bicicletas)
-const prod14 = new Producto("Casco Bicicleta Vairo", 0016, 16743, 13, true, bicicletas)
-const prod15 = new Producto("Bicicleta Zenith", 0017, 127863, 8, true, bicicletas)
-const prod16 = new Producto("Bicicleta Vairo", 0020, 143290, 8, true, bicicletas)
-const prod17 = new Producto("Inflador Shimano", 0021, 3211, 8, true, bicicletas)
-const prod18 = new Producto("Inflador Olmo", 0022, 2167, 8, true, bicicletas)
+const prod13 = new Producto("Casco Bicicleta Shimano", 0015, 13789, 15, true, "bicicletas")
+const prod14 = new Producto("Casco Bicicleta Vairo", 0016, 16743, 13, true, "bicicletas")
+const prod15 = new Producto("Bicicleta Zenith", 0017, 127863, 8, true, "bicicletas")
+const prod16 = new Producto("Bicicleta Vairo", 0020, 143290, 8, true, "bicicletas")
+const prod17 = new Producto("Inflador Shimano", 0021, 3211, 8, true, "bicicletas")
+const prod18 = new Producto("Inflador Olmo", 0022, 2167, 8, true, "bicicletas")
+
+
+
+
+let productosEscalada = []
+productosEscalada.push(prod1,prod2,prod3,prod4,prod5,prod6)
+
+let productosEsqui = []
+productosEsqui.push(prod7,prod8,prod9,prod10,prod11,prod12)
+
+let productosBici = []
+productosBici.push(prod13,prod14,prod15,prod16,prod17,prod18)
 
 
 
@@ -71,6 +85,7 @@ function ingresarUsuario() {
 let agregarACarrito = function (prod) {
     alert(`Se agregó ${prod.nombre} al carrito`)
     carrito.push(prod)
+    actualizarProductos()
 }
 
 
@@ -177,34 +192,102 @@ agregarACarrito(productoAComprar)
 
 
 //Inicio de las funciones
+const seleccionador = document.querySelector("#seleccionador")
 
-let botonSeccionEscalada = document.getElementById("botonEscalada")
-botonSeccionEscalada.addEventListener("click", seccionEscalada)
+const botonEscalada = document.getElementById("botonEscalada")
+botonEscalada.addEventListener("click", crearCards(productosEscalada))
 
-let botonSeccionEsqui = document.getElementById("botonEsqui")
-botonSeccionEsqui.addEventListener("click", seccionEsqui)
+let botonEsqui = document.getElementById("botonEsqui")
+botonEsqui.addEventListener("click", crearCards(productosEsqui))
 
 let botonSeccionBici = document.getElementById("botonBici")
-botonSeccionBici.addEventListener("click", seccionBicicletas)
+botonSeccionBici.addEventListener("click", crearCards(productosBici))
+
+
 
 //Lista de productos en carrito con map()
 
-const productosCarrito = carrito.map((el) => el.nombre)
-const sumaPrecios = carrito.map((el) => el.precio)
+function actualizarProductos() {
+    const productosCarrito = carrito.map((el) => el.nombre)
 
-const listaCarrito = document.getElementById("prodCarrito")
-listaCarrito.innerText = productosCarrito.join(", ")
+    const sumaPrecios = carrito.map((el) => el.precio)
 
-
-//Precio total por la compra con reduce()
-
-const precioTotal = sumaPrecios.reduce((acumulador, elemento) => acumulador + elemento, 0)
-
-//alert("El precioo total es: $" + precioTotal)
-
-const listaPrecioCarrito = document.getElementById("precioCarrito")
-listaPrecioCarrito.innerText = precioTotal
+    const listaCarrito = document.getElementById("prodCarrito")
+    listaCarrito.innerText = productosCarrito.join(", ")
 
 
+    //Precio total por la compra con reduce()
+
+    const precioTotal = sumaPrecios.reduce((acumulador, elemento) => acumulador + elemento, 0)
+
+    const listaPrecioCarrito = document.getElementById("precioCarrito")
+    listaPrecioCarrito.innerText = precioTotal
+
+}
+
+function crearCards(lista) {
+    listaElegida = ""
+    lista.forEach((prod) => {
+        listaElegida+= `<div> 
+        <h4>${prod.nombre} </h4>
+        <h4>$${prod.precio} </h4>
+        <button id="btn-prod${prod.id}">Agregar</button>
+        </div>`
+        seleccionador.innerHTML = listaElegida
+    })
+}
+
+
+// function cargarTablaProdEscalada () {
+//     const tablaProd = document.getElementById("tablaProd")
+//     productosEscalada.forEach(producto => {
+//         tablaProd.innerHTML  += `<tr> 
+//                                     <td> ${producto.id}</td>
+//                                     <td> ${producto.nombre}</td>
+//                                     <td> ${producto.precio}</td>
+//                                     <td> ${producto.stock}</td>
+//                                 </tr>`
+//     }
+
+//     )
+// }
+
+// cargarTablaProdEscalada ()
+
+// const selectProd = document.querySelector("#selectProd")
+
+
+// function cargarSelectEscalada() {
+//     let selectEscalada = ""
+//     productosEscalada.sort((a,b) => a.nombre.localeCompare(b.nombre))
+//     productosEscalada.forEach(prod => {
+//         selectEscalada += `<option value="${prod.id}">${prod.nombre}</option>`
+//         selectProd.innerHTML = selectEscalada
+//     }
+    
+//     )
+// }
+
+// function cargarSelectEsqui() {
+//     let selectEsqui = ""
+//     productosEsqui.sort((a,b) => a.nombre.localeCompare(b.nombre))
+//     productosEsqui.forEach(prod => {
+//         selectEsqui += `<option value="${prod.id}">${prod.nombre}</option>`
+//     selectProd.innerHTML = selectEsqui
+//     }
+
+//     )
+// }
+
+// function cargarSelectBici() {
+//     let selectBici = ""
+//     productosBici.sort((a,b) => a.nombre.localeCompare(b.nombre))
+//     productosBici.forEach(prod => {
+//         selectBici += `<option value="${prod.id}">${prod.nombre}</option>`
+//         selectProd.innerHTML = selectBici
+//     }
+
+//     )
+// }
 
 

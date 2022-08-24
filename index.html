@@ -21,13 +21,23 @@
         <button id="botonEsqui"type="button" class="btn btn-secondary">Esqui y Snowboard</button>
         <button id="botonBici" type="button" class="btn btn-secondary">Bicicletas</button>
 
+
     </header>
     <main>
         <p>Usuario: <strong id="nombreIngresado">Ingrese su nombre de Usuario</strong></p>
         <p>Nos dedicamos a deportes outdoor. Montañismo y escalada. En invierno Esqui/Snowboar y en verano Bicicletería
         </p>
         <p>Podrá elegir productos de cada sección, agregarlos al carrito y saber el costo total de los mismos.</p>
+        
+        <select class="form-select form-select-lg mb-3" name="seccion" id="selectProd" >
+            <option selected>Seleccione el producto que desea agregar al carrito</option>
 
+        </select>
+        <button id="botonAgregar" class="btn" type="button">Agregar a carrito</button>
+        
+        <div id="seleccionador">
+
+        </div>
         <div>Productos agregados al carrito..:
             <strong id="prodCarrito"></strong>
         </div>
