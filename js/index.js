@@ -3,7 +3,7 @@ let marca
 let bicicletas
 let esqui
 const IVA = 1.21
-const carrito = []
+let carrito = []
 let productoAComprar;
 
 
@@ -63,7 +63,7 @@ productosEsqui.push(prod7,prod8,prod9,prod10,prod11,prod12)
 let productosBici = []
 productosBici.push(prod13,prod14,prod15,prod16,prod17,prod18)
 
-
+const productos = productosEscalada.concat(productosEsqui, productosBici)
 
 //Ingresar nombre de usuario
 
@@ -89,119 +89,20 @@ let agregarACarrito = function (prod) {
 }
 
 
-//SECCIONES
-
-//Seccion Escalada
-
-
-function seccionEscalada () {
-    let productoEscalada;
-do {
-    productoEscalada = prompt(`Seccion ESCALADA Y MONTAÑISMO \nQue producto agregar al carrito? \n1)${prod1.nombre} \n2)${prod2.nombre} \n3)${prod3.nombre} \n4)${prod4.nombre} \n5)${prod5.nombre} \n6)${prod6.nombre}` )
-} while ( productoEscalada != 1 && productoEscalada!= 2 && productoEscalada != 3 && productoEscalada != 4 && productoEscalada != 5 && productoEscalada != 6 );
-
-switch (productoEscalada) {
-    case "1" : 
-        productoAComprar = prod1
-        break
-    case "2" :
-        productoAComprar = prod2
-        break
-    case "3" :
-        productoAComprar = prod3
-        break
-    case "4" :
-        productoAComprar = prod4
-        break
-    case "5" :
-        productoAComprar = prod5
-        break
-    case "6" :
-        productoAComprar = prod6
-        break
-}
-agregarACarrito(productoAComprar)
-
-}
-
-//Seccion Esqui
-
-function seccionEsqui () {
-    let productoEsqui;
-do {
-    productoEsqui = prompt(`Seccion ESQUI Y SNOWBOARD \nQue producto agregar al carrito? \n1)${prod7.nombre} \n2)${prod8.nombre} \n3)${prod9.nombre} \n4)${prod10.nombre} \n5)${prod11.nombre} \n6)${prod12.nombre}` )
-} while ( productoEsqui != 1 && productoEsqui != 2 && productoEsqui != 3 && productoEsqui != 4 && productoEsqui != 5 && productoEsqui != 6);
-
-switch (productoEsqui) {
-    case "1" : 
-        productoAComprar = prod7
-        break
-    case "2" :
-        productoAComprar = prod8
-        break
-    case "3" :
-        productoAComprar = prod9
-        break
-    case "4" :
-        productoAComprar = prod10
-        break
-    case "5" :
-        productoAComprar = prod11
-        break
-    case "6" :
-        productoAComprar = prod12
-        break
-}
-agregarACarrito(productoAComprar)
-
-}
-
-//Seccion Bicicletas
-
-function seccionBicicletas () {
-    let productoBicicletas;
-do {
-    productoBicicletas = prompt(`Seccion BICICLETAS \nQue producto desea agregar al carrito? \n1)${prod13.nombre} \n2)${prod14.nombre} \n3)${prod15.nombre} \n4)${prod16.nombre} \n5)${prod17.nombre} \n6)${prod18.nombre}` )
-} while ( productoBicicletas != 1 && productoBicicletas!= 2 && productoBicicletas != 3 && productoBicicletas != 4 && productoBicicletas != 5 && productoBicicletas != 6);
-
-switch (productoBicicletas) {
-    case "1" : 
-        productoAComprar = prod13
-        break
-    case "2" :
-        productoAComprar = prod14
-        break
-    case "3" :
-        productoAComprar = prod15
-        break
-    case "4" :
-        productoAComprar = prod16
-        break
-    case "5" :
-        productoAComprar = prod17
-        break
-    case "6" :
-        productoAComprar = prod18
-        break
-        
-}
-agregarACarrito(productoAComprar)
-
-}
-
-
 
 //Inicio de las funciones
 const seleccionador = document.querySelector("#seleccionador")
 
+
 const botonEscalada = document.getElementById("botonEscalada")
-botonEscalada.addEventListener("click", crearCards(productosEscalada))
+botonEscalada.addEventListener("click", () => crearCards(productosEscalada))
+
 
 let botonEsqui = document.getElementById("botonEsqui")
-botonEsqui.addEventListener("click", crearCards(productosEsqui))
+botonEsqui.addEventListener("click", () => crearCards(productosEsqui))
 
 let botonSeccionBici = document.getElementById("botonBici")
-botonSeccionBici.addEventListener("click", crearCards(productosBici))
+botonSeccionBici.addEventListener("click", () => crearCards(productosBici))
 
 
 
@@ -228,14 +129,30 @@ function actualizarProductos() {
 function crearCards(lista) {
     listaElegida = ""
     lista.forEach((prod) => {
-        listaElegida+= `<div> 
+        listaElegida+= `<div class="card"> 
         <h4>${prod.nombre} </h4>
         <h4>$${prod.precio} </h4>
-        <button id="btn-prod${prod.id}">Agregar</button>
+        <button id="btn-prod${prod.id}" class="btn btn-secondary">Agregar</button>
         </div>`
-        seleccionador.innerHTML = listaElegida
+        seleccionador.innerHTML = listaElegida;
     })
+    btnAgregar(lista);
 }
+
+function btnAgregar (productosAgregados) {
+    productosAgregados.forEach((prod) =>{
+        document
+            .querySelector(`#btn-prod${prod.id}`)
+            .addEventListener("click", () => {
+                console.log(prod)
+                agregarACarrito(prod)
+            })
+    }
+
+    )
+}
+
+
 
 
 // function cargarTablaProdEscalada () {
