@@ -3,7 +3,7 @@ let marca
 let bicicletas
 let esqui
 const IVA = 1.21
-let carrito = []
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let productoAComprar;
 
 
@@ -83,11 +83,19 @@ function ingresarUsuario() {
 
 
 let agregarACarrito = function (prod) {
-    alert(`Se agregó ${prod.nombre} al carrito`)
     carrito.push(prod)
+    localStorage.setItem("carrito", JSON.stringify(carrito))
     actualizarProductos()
 }
+actualizarProductos()
 
+const btnBorrar = document.querySelector("#btnBorrar")
+btnBorrar.addEventListener("click", () => borrarCarrito())
+function borrarCarrito() {
+    localStorage.removeItem("carrito")
+    carrito = []
+    actualizarProductos()
+}
 
 
 //Inicio de las funciones
@@ -114,7 +122,7 @@ function actualizarProductos() {
     const sumaPrecios = carrito.map((el) => el.precio)
 
     const listaCarrito = document.getElementById("prodCarrito")
-    listaCarrito.innerText = productosCarrito.join(", ")
+    listaCarrito.innerText = productosCarrito.join(`, `)
 
 
     //Precio total por la compra con reduce()
