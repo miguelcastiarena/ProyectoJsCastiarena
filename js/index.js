@@ -1,93 +1,57 @@
-let escalada
-let marca
-let bicicletas
-let esqui
-const IVA = 1.21
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-let productoAComprar;
-
-
-class Producto {
-    constructor(nombre, id, precio, stock, nuevo, seccion) {
-        this.nombre = nombre.toUpperCase();
-        this.id = id;
-        this.precio = precio;
-        this.stock = stock;
-        this.nuevo = nuevo;
-        this.seccion = seccion
-    }
-    precioConIVA() {
-            let precioFinal = this.precio * IVA
-            return "$ " + precioFinal
-        }
-    actulizarStock(unidades){
-            this.stock = this.stock - unidades
-        }
-
-}
-
-
-//Productos Escalada
-const prod1 = new Producto("Casco Edelrid Zodiac", 0001, 18861, 10, true, "escalada")
-const prod2 = new Producto("Casco Petzl Siroco", 0002, 37111, 8, true, "escalada")
-const prod3 = new Producto("Zapatillas Miura VS", 0003, 45876, 12, true, "escalada")
-const prod4 = new Producto("Zapatillas Cobra", 0004, 31756, 14, true, "escalada")
-const prod5 = new Producto("Arnés Petzl Corax", 0005, 34765, 12, true, "escalada")
-const prod6 = new Producto("Arnés Edelrid Prisma", 0006, 26842, 16, true, "escalada")
-
-//Productos Esqui
-const prod7 = new Producto("Casco Salewa Vert", 0007, 23458, 8, true, "esqui")
-const prod8 = new Producto("Casco Anon Greeta", 0010, 27500, 10, true, "esqui")
-const prod9 = new Producto("Botas Salomon Quest", 0011, 65873, 4, true, "esqui")
-const prod10 = new Producto("Botas Dalbello Lupo", 0012, 89690, 6, true, "esqui")
-const prod11 = new Producto("Esquies Rossignol Soul", 0013, 123768, 5, true, "esqui")
-const prod12 = new Producto("Esquies Fisher Ranger", 0014, 120543, 3, true, "esqui")
-
-//Productos Bicicletas
-const prod13 = new Producto("Casco Bicicleta Shimano", 0015, 13789, 15, true, "bicicletas")
-const prod14 = new Producto("Casco Bicicleta Vairo", 0016, 16743, 13, true, "bicicletas")
-const prod15 = new Producto("Bicicleta Zenith", 0017, 127863, 8, true, "bicicletas")
-const prod16 = new Producto("Bicicleta Vairo", 0020, 143290, 8, true, "bicicletas")
-const prod17 = new Producto("Inflador Shimano", 0021, 3211, 8, true, "bicicletas")
-const prod18 = new Producto("Inflador Olmo", 0022, 2167, 8, true, "bicicletas")
-
-
-
-
-let productosEscalada = []
-productosEscalada.push(prod1,prod2,prod3,prod4,prod5,prod6)
-
-let productosEsqui = []
-productosEsqui.push(prod7,prod8,prod9,prod10,prod11,prod12)
-
-let productosBici = []
-productosBici.push(prod13,prod14,prod15,prod16,prod17,prod18)
-
-const productos = productosEscalada.concat(productosEsqui, productosBici)
 
 //Ingresar nombre de usuario
 
 let nombreUsuario = document.getElementById("nombreIngresado")
 const boton = document.getElementById("botonUsuario")
-boton.addEventListener("click", ingresarUsuario)
+boton.addEventListener("click", saPrompt)
 
-function ingresarUsuario() {
-    alert("Bienvenido a La Bolsa del Deporte Tienda Online");
-    let nombre = prompt("Ingrese su nombre:")
-    while (nombre === "" || nombre === null) {
-        nombre = prompt("Ingrese su nombre:")
-    }
-    nombreUsuario.innerText = nombre
+
+function saPrompt() {
+    let nombre = "Ingrese su Usuario"
+    Swal.fire({
+        position: "top-start",
+        title: 'Bienvenido a la Bolsa del Deporte Online!',
+        text: 'Ingrese su Usuario',
+        input: "text",
+        inputPlaceholder: 'Usuario',
+        inputAttributes: {
+            maxlength: 10,
+            },
+        confirmButtonText: 'Ingresar'
+      }).then((usuario) => {
+        nombre = usuario.value
+        nombreUsuario.innerText = nombre
+      });
+      
 }
 
-
+const saAlert = ()=> {
+    Swal.fire({
+        position: "top-end",
+        toast: "true",
+        title: 'Supera el Límite de Stock!',
+        icon: 'warning',
+        color: "orange",
+        confirmButtonText: 'Continuar'
+      })
+}
 
 let agregarACarrito = function (prod) {
-    carrito.push(prod)
+
+    let existe = carrito.some(productoSome =>  productoSome.id == prod.id)
+    existe == false ? 
+        prod.cantidad=1 && carrito.push(prod) : 
+        prod.cantidad < prod.stock ? prod.cantidad++ :
+        saAlert()
+
     localStorage.setItem("carrito", JSON.stringify(carrito))
     actualizarProductos()
 }
 actualizarProductos()
+
+
+const btnCarrito = document.querySelector("#btnCarrito")
+btnCarrito.addEventListener("click", () => abrirCarrito())
 
 const btnBorrar = document.querySelector("#btnBorrar")
 btnBorrar.addEventListener("click", () => borrarCarrito())
@@ -95,16 +59,15 @@ function borrarCarrito() {
     localStorage.removeItem("carrito")
     carrito = []
     actualizarProductos()
+    abrirCarrito()
 }
 
 
 //Inicio de las funciones
 const seleccionador = document.querySelector("#seleccionador")
 
-
-const botonEscalada = document.getElementById("botonEscalada")
+let botonEscalada = document.getElementById("botonEscalada")
 botonEscalada.addEventListener("click", () => crearCards(productosEscalada))
-
 
 let botonEsqui = document.getElementById("botonEsqui")
 botonEsqui.addEventListener("click", () => crearCards(productosEsqui))
@@ -114,20 +77,14 @@ botonSeccionBici.addEventListener("click", () => crearCards(productosBici))
 
 
 
-//Lista de productos en carrito con map()
-
 function actualizarProductos() {
-    const productosCarrito = carrito.map((el) => el.nombre)
+    let productosCarrito = carrito.map((el) => `${el.nombre} (${el.cantidad})`)
+    let sumaPrecios = carrito.map((el) => el.precio)
 
-    const sumaPrecios = carrito.map((el) => el.precio)
-
-    const listaCarrito = document.getElementById("prodCarrito")
+    let listaCarrito = document.getElementById("prodCarrito")
     listaCarrito.innerText = productosCarrito.join(`, `)
 
-
-    //Precio total por la compra con reduce()
-
-    const precioTotal = sumaPrecios.reduce((acumulador, elemento) => acumulador + elemento, 0)
+    let precioTotal = sumaPrecios.reduce((acumulador, elemento) => acumulador + elemento, 0)
 
     const listaPrecioCarrito = document.getElementById("precioCarrito")
     listaPrecioCarrito.innerText = precioTotal
@@ -137,15 +94,19 @@ function actualizarProductos() {
 function crearCards(lista) {
     listaElegida = ""
     lista.forEach((prod) => {
-        listaElegida+= `<div class="card"> 
-        <h4>${prod.nombre} </h4>
-        <h4>$${prod.precio} </h4>
-        <button id="btn-prod${prod.id}" class="btn btn-secondary">Agregar</button>
-        </div>`
+        listaElegida+= 
+        `<div class="card" > 
+            <h4 class="card-header light">${prod.nombre} </h4>
+            <div class="card-body"> 
+                <h4 class="card-text">$${prod.precio} </h4>
+                <button id="btn-prod${prod.id}" class="btn btn-secondary">Agregar</button>
+            </div>
+          </div>`
         seleccionador.innerHTML = listaElegida;
     })
     btnAgregar(lista);
 }
+
 
 function btnAgregar (productosAgregados) {
     productosAgregados.forEach((prod) =>{
@@ -160,59 +121,51 @@ function btnAgregar (productosAgregados) {
     )
 }
 
-
-
-
-// function cargarTablaProdEscalada () {
-//     const tablaProd = document.getElementById("tablaProd")
-//     productosEscalada.forEach(producto => {
-//         tablaProd.innerHTML  += `<tr> 
-//                                     <td> ${producto.id}</td>
-//                                     <td> ${producto.nombre}</td>
-//                                     <td> ${producto.precio}</td>
-//                                     <td> ${producto.stock}</td>
-//                                 </tr>`
-//     }
-
-//     )
-// }
-
-// cargarTablaProdEscalada ()
-
-// const selectProd = document.querySelector("#selectProd")
-
-
-// function cargarSelectEscalada() {
-//     let selectEscalada = ""
-//     productosEscalada.sort((a,b) => a.nombre.localeCompare(b.nombre))
-//     productosEscalada.forEach(prod => {
-//         selectEscalada += `<option value="${prod.id}">${prod.nombre}</option>`
-//         selectProd.innerHTML = selectEscalada
-//     }
+function abrirCarrito() {
+    seleccionador.innerHTML = ""
+    carrito.forEach((prod) => {
+        seleccionador.innerHTML +=
+        `<div class="card" > 
+            <h4 class="card-header light">${prod.nombre} </h4>
+            <div class="card-body"> 
+                <h4 class="card-text">$${prod.precio} </h4>
+                <h5 class="card-text">Cantidad ${prod.cantidad} </h4>
+                <button id="btn-quitar${prod.id}" class="btn btn-info w-50">Quitar del carrito</button>
+                <button id="btn-prod${prod.id}" class="btn btn-info w-50">Agregar al carrito</button>
+            </div>
+          </div>`
+    }
+    )
+    quitarProducto()
+    sumarProducto()
+}
+function quitarProducto() {
+    carrito.forEach((prod) =>{
+        document
+            .querySelector(`#btn-quitar${prod.id}`)
+            .addEventListener("click", () => { 
+                if (prod.cantidad  >1) {
+                    prod.cantidad--;
+                } else {
+                    carrito = carrito.filter((prodFilter) => prodFilter.id !== prod.id);
+                }
+                localStorage.setItem("carrito", JSON.stringify(carrito))
+                abrirCarrito()
+                actualizarProductos()
+            })
+             
+    }
+    )
+} 
+function sumarProducto() {
+    carrito.forEach((prod) =>
+    document.querySelector(`#btn-prod${prod.id}`)
+    .addEventListener("click", () => {
+        prod.cantidad < prod.stock ? prod.cantidad++ : saAlert()
+        localStorage.setItem("carrito", JSON.stringify(carrito))
+        abrirCarrito()
+        actualizarProductos()
+    })
+    ) 
     
-//     )
-// }
-
-// function cargarSelectEsqui() {
-//     let selectEsqui = ""
-//     productosEsqui.sort((a,b) => a.nombre.localeCompare(b.nombre))
-//     productosEsqui.forEach(prod => {
-//         selectEsqui += `<option value="${prod.id}">${prod.nombre}</option>`
-//     selectProd.innerHTML = selectEsqui
-//     }
-
-//     )
-// }
-
-// function cargarSelectBici() {
-//     let selectBici = ""
-//     productosBici.sort((a,b) => a.nombre.localeCompare(b.nombre))
-//     productosBici.forEach(prod => {
-//         selectBici += `<option value="${prod.id}">${prod.nombre}</option>`
-//         selectProd.innerHTML = selectBici
-//     }
-
-//     )
-// }
-
-
+}

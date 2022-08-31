@@ -21,13 +21,18 @@ nav {
 }
 
 .card {
-    background-color: rgb(43, 159, 226) !important;
+   
     border: 2px solid !important;
     padding: 1%;
+    width: 18rem
 }
 
 .seleccionador{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+}
+
+.btn {
+    display: inline !important
 }
