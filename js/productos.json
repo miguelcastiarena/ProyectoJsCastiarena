@@ -1,0 +1,193 @@
+[
+    { 
+        "nombre": "Casco Edelrid Zodiac",
+        "id": 1, 
+        "precio": 18861, 
+        "stock": 10, 
+        "estado": "Nuevo", 
+        "seccion": "escalada",
+        "imagen": "./img/edelrid-casco-zodiac.jpeg"
+        
+    },
+    { 
+        "nombre": "Casco Petzl Siroco",
+        "id": 2, 
+        "precio": 37111, 
+        "stock": 8, 
+        "estado": "Nuevo", 
+        "seccion": "escalada",
+        "imagen": "./img/petzl-casco-sirocco.jpeg"
+        
+    },
+    { 
+        "nombre": "Zapatillas Miura VS",
+        "id": 3, 
+        "precio": 45876, 
+        "stock": 12, 
+        "estado": "Nuevo", 
+        "seccion": "escalada",
+        "imagen": "./img/la-sportiva-pies-de-gato-miura-vs.jpeg"
+        
+    },
+    { 
+        "nombre": "Zapatillas Cobra",
+        "id": 4, 
+        "precio": 31756, 
+        "stock": 14, 
+        "estado": "Nuevo", 
+        "seccion": "escalada",
+        "imagen": "./img/la-sportiva-pies-de-gato-cobra.jpeg"
+    
+    },
+    { 
+        "nombre": "Arnés Petzl Corax",
+        "id": 5, 
+        "precio": 34765, 
+        "stock": 12, 
+        "estado": "Nuevo", 
+        "seccion": "escalada",
+        "imagen": "./img/petzl-arnes-corax.jpeg"
+        
+    },
+    { 
+        "nombre": "Arnés Edelrid Prisma",
+        "id": 6, 
+        "precio": 26842, 
+        "stock": 16, 
+        "estado": "Nuevo", 
+        "seccion": "escalada",
+        "imagen": "./img/edelrid-arnes-prisma.jpeg"
+    
+    },
+    { 
+        "nombre": "Casco Salewa Vert",
+        "id": 7, 
+        "precio": 23458, 
+        "stock": 8, 
+        "estado": "Nuevo", 
+        "seccion": "esqui",
+        "imagen": "./img/salewa-casco-vert.jpeg"
+        
+    },
+    { 
+        "nombre": "Casco Anon Greeta",
+        "id": 8, 
+        "precio": 27500, 
+        "stock": 10, 
+        "estado": "Nuevo", 
+        "seccion": "esqui",
+        "imagen": "./img/casco-anon-greeta.jpeg"
+        
+        
+    },
+    { 
+        "nombre": "Botas Salomon Quest",
+        "id": 9, 
+        "precio": 65873, 
+        "stock": 4, 
+        "estado": "Nuevo", 
+        "seccion": "esqui",
+        "imagen": "./img/salomon-botas-esqui-alpino-quest-access-80.jpeg"   
+        
+        
+    },
+    { 
+        "nombre": "Botas Dalbello Lupo",
+        "id": 10, 
+        "precio": 89690, 
+        "stock": 6, 
+        "estado": "Nuevo", 
+        "seccion": "esqui",
+        "imagen": "./img/botas-dalbello-lupo.jpeg"
+        
+    
+    },
+    { 
+        "nombre": "Esquies Rossignol Soul",
+        "id": 11, 
+        "precio": 123768, 
+        "stock": 5, 
+        "estado": "Nuevo", 
+        "seccion": "esqui",
+        "imagen": "./img/esqui-rossignol-soul-7-hd.jpeg"
+        
+        
+    },
+    { 
+        "nombre": "Esquies Fisher Ranger",
+        "id": 12, 
+        "precio": 120543, 
+        "stock": 3, 
+        "estado": "Nuevo", 
+        "seccion": "esqui",
+        "imagen": "./img/esquies-fisher-ranger.jpeg"
+        
+        
+    },
+    { 
+        "nombre": "Casco Bicicleta Shimano",
+        "id": 13, 
+        "precio": 13789, 
+        "stock": 15, 
+        "estado": "Nuevo", 
+        "seccion": "bicicletas",
+        "imagen": "./img/casco-bicicleta-shimano.jpeg"
+        
+        
+    },
+    { 
+        "nombre": "Casco Bicicleta Vairo",
+        "id": 14, 
+        "precio": 16743, 
+        "stock": 13, 
+        "estado": "Nuevo", 
+        "seccion": "bicicletas",
+        "imagen": "./img/casco-ciclista-vairo-blaze-negro-715040283048518-2.jpeg"
+        
+        
+    },
+    { 
+        "nombre": "Bicicleta Zenith",
+        "id": 15, 
+        "precio": 127863, 
+        "stock": 8, 
+        "estado": "Nuevo", 
+        "seccion": "bicicletas",
+        "imagen": "./img/bicicleta-zenith.jpeg"
+    
+        
+    },
+    { 
+        "nombre": "Bicicleta Vairo",
+        "id": 16, 
+        "precio": 143290, 
+        "stock": 6, 
+        "estado": "Nuevo", 
+        "seccion": "bicicletas",
+        "imagen": "./img/bicicleta-vairo.jpeg"
+        
+       
+    },
+    { 
+        "nombre": "Inflador Shimano",
+        "id": 17, 
+        "precio": 3211, 
+        "stock": 7, 
+        "estado": "Nuevo", 
+        "seccion": "bicicletas",
+        "imagen": "./img/inflador-de-mano-shimano.jpeg"
+        
+        
+    },
+    { 
+        "nombre": "Inflador Atletic",
+        "id": 18, 
+        "precio": 2167, 
+        "stock": 8, 
+        "estado": "Nuevo", 
+        "seccion": "bicicletas",
+        "imagen": "./img/inflador-atletic.jpeg"
+        
+        
+    }
+]

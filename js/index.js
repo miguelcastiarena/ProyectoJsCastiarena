@@ -63,7 +63,6 @@ function borrarCarrito() {
 }
 
 
-//Inicio de las funciones
 const seleccionador = document.querySelector("#seleccionador")
 
 let botonEscalada = document.getElementById("botonEscalada")
@@ -80,7 +79,6 @@ botonSeccionBici.addEventListener("click", () => crearCards(productosBici))
 function actualizarProductos() {
     let productosCarrito = carrito.map((el) => `${el.nombre} (${el.cantidad})`)
     let sumaPrecios = carrito.map((el) => el.precio)
-
     let listaCarrito = document.getElementById("prodCarrito")
     listaCarrito.innerText = productosCarrito.join(`, `)
 
@@ -98,7 +96,10 @@ function crearCards(lista) {
         `<div class="card" > 
             <h4 class="card-header light">${prod.nombre} </h4>
             <div class="card-body"> 
+                <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}" title="${prod.nombre}">
                 <h4 class="card-text">$${prod.precio} </h4>
+                <p class="card-text">Disponibles: ${prod.stock}</p>
+                <p class="card-text">Estado: ${prod.estado}</p>
                 <button id="btn-prod${prod.id}" class="btn btn-secondary">Agregar</button>
             </div>
           </div>`
@@ -128,6 +129,7 @@ function abrirCarrito() {
         `<div class="card" > 
             <h4 class="card-header light">${prod.nombre} </h4>
             <div class="card-body"> 
+                <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}" title="${prod.nombre}">
                 <h4 class="card-text">$${prod.precio} </h4>
                 <h5 class="card-text">Cantidad ${prod.cantidad} </h4>
                 <button id="btn-quitar${prod.id}" class="btn btn-info w-50">Quitar del carrito</button>
@@ -139,6 +141,7 @@ function abrirCarrito() {
     quitarProducto()
     sumarProducto()
 }
+
 function quitarProducto() {
     carrito.forEach((prod) =>{
         document
@@ -157,6 +160,7 @@ function quitarProducto() {
     }
     )
 } 
+
 function sumarProducto() {
     carrito.forEach((prod) =>
     document.querySelector(`#btn-prod${prod.id}`)
