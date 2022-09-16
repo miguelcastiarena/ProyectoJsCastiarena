@@ -1,17 +1,22 @@
 body {
-    background-color: bisque;
+    background-color: #416165;
     font-family: sans-serif;
 }
 
 main {
     font-family: sans-serif;
-    background-color: yellowgreen;
+    background-color: white;
     padding: 2%;
 }
 
 header {
-    background-color: rgb(47, 82, 171);
+    background-color: #416165;
     padding: 2%;
+}
+
+footer {
+    background-color: #D0CEBA;
+    min-height: 70px;
 }
 
 nav {
@@ -35,4 +40,24 @@ nav {
 
 .btn {
     display: inline !important
+}
+.carritoText{
+    color: #D0CDD7;
+    font-size: 20px;
+    margin-left: 1%;    
+}
+
+
+.preLoader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+h3 {
+    color: #6D3B47;
+}
+
+h1 {
+    color: #D9DBF1;
 }
